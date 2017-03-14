@@ -2,7 +2,7 @@ var CACHE_NAME = 'gih-cache';
 var CACHED_URLS = [
   'first.html',
   'styles.css',
-  'paddy.png'
+  'paddy.jpeg'
 ];
 
 self.addEventListener('install', function(event) {
