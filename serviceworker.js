@@ -1,8 +1,8 @@
 var CACHE_NAME = 'gih-cache';
 var CACHED_URLS = [
-  'offline.html',
-  'mystyles.css',
-  'dino.png'
+  'first.html',
+  'styles.css',
+  'paddy.png'
 ];
 
 self.addEventListener('install', function(event) {
