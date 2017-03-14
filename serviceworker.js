@@ -20,7 +20,7 @@ self.addEventListener('fetch', function(event) {
         if (response) {
           return response;
         } else if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('offline.html');
+          return caches.match('first.html');
         }
       });
     })
