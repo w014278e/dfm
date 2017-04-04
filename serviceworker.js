@@ -1,9 +1,12 @@
 var BASE_PATH = '/dfm/';
 var CACHE_NAME = 'gih-cache-v7';
+var TEMP_IMAGE_CACHE_NAME = 'temp-cache-v1';
+var newsAPIJSON = "https://newsapi.org/v1/articles?source=bbc-news&apiKey=2117f72d54d5433eba479863fb7ab3e5";
 var CACHED_URLS = [
     // Our HTML
     BASE_PATH + 'first.html',
     BASE_PATH + 'offline.html',
+    BASE_PATH + 'second.html',
     
     // Images for favicons
     BASE_PATH + 'appimages/android-icon-36x36.png',
@@ -27,6 +30,7 @@ var CACHED_URLS = [
     BASE_PATH + 'appimages/ms-icon-144x144.png',
     BASE_PATH + 'appimages/ms-icon-150x150.png',
     BASE_PATH + 'appimages/ms-icon-310x310.png',
+    BASE_PATH + 'appimages/news-default.jpg',
     
     // JavaScript
     BASE_PATH + 'offline-map.js',
