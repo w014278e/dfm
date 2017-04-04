@@ -73,23 +73,24 @@ self.addEventListener('fetch', function(event) {
         });
       })
     );
- // Handle requests for Google Maps JavaScript API file
-  } else if (requestURL.href === googleMapsAPIJS) {
-    event.respondWith(
-      fetch(
-        googleMapsAPIJS+'&'+Date.now(),
-        { mode: 'no-cors', cache: 'no-store' }
-      ).catch(function() {
-        return caches.match('offline-map.js');
-      })
-    );
-      
-      // Handle requests for events JSON file
+ // Handle requests for events JSON file
   } else if (requestURL.pathname === BASE_PATH + 'events.json') {
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
         return fetch(event.request).then(function(networkResponse) {
           cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        }).catch(function() {
+          return caches.match(event.request);
+        });
+      })
+    );
+  } else if (requestURL.href === newsAPIJSON) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(function(cache) {
+        return fetch(event.request).then(function(networkResponse) {
+          cache.put(event.request, networkResponse.clone());
+          caches.delete(TEMP_IMAGE_CACHE_NAME);
           return networkResponse;
         }).catch(function() {
           return caches.match(event.request);
@@ -106,6 +107,20 @@ self.addEventListener('fetch', function(event) {
             return networkResponse;
           }).catch(function() {
             return cache.match('appimages/event-default.png');
+          });
+        });
+      })
+    );
+  // 
+  } else if (requestURL.href.includes('bbci.co.uk/news/')) {
+    event.respondWith(
+      caches.open(TEMP_IMAGE_CACHE_NAME).then(function(cache) {
+        return cache.match(event.request).then(function(cacheResponse) {
+          return cacheResponse||fetch(event.request, {mode: 'no-cors'}).then(function(networkResponse) {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          }).catch(function() {
+            return cache.match('appimages/news-default.jpg');
           });
         });
       })
