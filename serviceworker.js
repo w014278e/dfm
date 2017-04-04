@@ -112,19 +112,7 @@ self.addEventListener('fetch', function(event) {
       })
     );
   // 
-  } else if (requestURL.href.includes('bbci.co.uk/news/')) {
-    event.respondWith(
-      caches.open(TEMP_IMAGE_CACHE_NAME).then(function(cache) {
-        return cache.match(event.request).then(function(cacheResponse) {
-          return cacheResponse||fetch(event.request, {mode: 'no-cors'}).then(function(networkResponse) {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          }).catch(function() {
-            return cache.match('appimages/news-default.jpg');
-          });
-        });
-      })
-    );
+  } 
 
   } else if (
     CACHED_URLS.includes(requestURL.href) ||
