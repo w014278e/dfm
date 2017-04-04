@@ -3,6 +3,7 @@ var CACHE_NAME = 'gih-cache-v7';
 var CACHED_URLS = [
     // Our HTML
     BASE_PATH + 'first.html',
+    BASE_PATH + 'offline.html',
     
     // Images for favicons
     BASE_PATH + 'appimages/android-icon-36x36.png',
